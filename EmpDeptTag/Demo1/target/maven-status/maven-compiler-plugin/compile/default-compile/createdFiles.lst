@@ -1,5 +1,6 @@
-app/components/EmployeeBean.class
 app/components/ShopDb.class
-app/components/EmployeeController.class
-app/components/ClockTag.class
+app/components/EmployeeBean.class
 app/components/EmpEntry.class
+app/components/ClockTag.class
+app/components/EmpViewTag.class
+app/components/EmployeeController.class

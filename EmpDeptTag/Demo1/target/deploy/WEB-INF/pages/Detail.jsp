@@ -18,6 +18,14 @@
                 <th>Action Date</th>
                 <th>Action Description</th>
             </tr>
+            <d:forEachEmp detailVar = "entry" empSource="${employee.detailsEmp}">
+                <tr>
+                    <td>${entry.EId}</td>
+                    <td>${entry.HId}</td>
+                    <td>${entry.adate}</td>
+                    <td>${entry.desc}</td>
+                </tr>
+            </d:forEachEmp>
            
         </table>
         <p>

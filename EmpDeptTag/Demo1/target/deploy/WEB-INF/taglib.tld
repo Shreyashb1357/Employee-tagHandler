@@ -28,5 +28,21 @@
 		</attribute>
   	</tag>
 
+	<tag>
+		<name>forEachEmp</name>
+		<tag-class>app.components.EmpViewTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>detailVar</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>empSource</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+  	</tag>
+
 </taglib>
 

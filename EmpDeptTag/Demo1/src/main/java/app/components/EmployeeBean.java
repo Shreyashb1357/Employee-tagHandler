@@ -5,7 +5,7 @@ import java.util.List;
 
 public class EmployeeBean {
     private String empName;
-
+    private int employeeId;
     public String getEmpName() {
         return empName;
     }
@@ -30,6 +30,7 @@ public class EmployeeBean {
             int count = rs.getInt(1);
             rs.close();
             stmt.close();
+            
             if(count == 1){
                 stmt = con.prepareStatement(
                     "SELECT emp_name FROM emp WHERE username = ?"
@@ -39,8 +40,20 @@ public class EmployeeBean {
                 rs = stmt.executeQuery();
                 rs.next();
                 String n = rs.getString(1);
+                rs.close();
+                stmt.close();
+
+                stmt = con.prepareStatement("select emp_id from emp where username = ?");
+                stmt.setString(1,eId);
+                rs = stmt.executeQuery();
+                rs.next();
+                int i = rs.getInt(1);
+                rs.close();
+                stmt.close();
+
                 empName = eId;
                 name = n;
+                employeeId = i;
                 return true;
             }
             empName = null;
@@ -50,9 +63,21 @@ public class EmployeeBean {
         }
     }
 
-    public void getDetailsEmp() {
-        
+    public List<EmpEntry> getDetailsEmp() {
+        try(var con = ShopDb.pool.getConnection()) {
+            var details = new ArrayList<EmpEntry>();
+            var stmt = con.prepareStatement("select history_id , emp_id, action_date, action_description  from emp_history where emp_id = ?");
+            stmt.setInt(1 , employeeId);
+            var rs = stmt.executeQuery();
+            while(rs.next()){
+                var data = new EmpEntry(rs);
+                details.add(data);
+            }
+            rs.close();
+            stmt.close();
+            return details;
+        }catch(SQLException e){
+            throw new RuntimeException(e);
+        }
     }
-
-
 }
